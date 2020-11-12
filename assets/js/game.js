@@ -4,20 +4,18 @@
 //    * Defeat each enemy-robot
 // "LOSE" - Player robot's health is zero or less
 
-// Fight function
-function fight () {
-    window.alert("The fight has begun!");
-}
+//Welcome players
 window.alert("Welcome to Robot Gladiators!");
+// Initialize player stats, including name
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
-
+// Initialize enemy array and stats
 var enemyNames = ["Roborto","Amy Android","Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
-
+// Fight function
 var fight = function(enemyName) {
     // repeat and execute as long as the enemy robot is alive
     while(enemyHealth > 0){
