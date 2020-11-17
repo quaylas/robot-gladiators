@@ -3,15 +3,24 @@
 //    * Fight all enemy-robots
 //    * Defeat each enemy-robot
 // "LOSE" - Player robot's health is zero or less
+
 // Initialize player stats, including name
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
+
 // Initialize enemy array and stats
 var enemyNames = ["Roborto","Amy Android","Robo Trumble"];
-var enemyHealth = 50;
+var enemyHealth = 60;
 var enemyAttack = 12;
+
+// function to generate random number between 40 and 60
+var randomNumber = function(min, max){
+    var value = Math.floor(Math.random() * (max - min + 1) + min);
+    return value;
+}
+
 // Fight function
 var fight = function(enemyName) {
     // repeat and execute as long as the enemy robot is alive
@@ -26,7 +35,7 @@ var fight = function(enemyName) {
             if (confirmSkip) {
                 window.alert(playerName + " has chosen to skip the fight!");
                 // subtract 10 from playerMoney
-                playerMoney = playerMoney - 10;
+                playerMoney = Math.max(0, playerMoney - 10);
                 console.log("playerMoney " + playerMoney);
                 break;
             }
@@ -36,7 +45,8 @@ var fight = function(enemyName) {
             }
         }
         // Subtract 'playerAttack' from 'enemyHealth'
-        enemyHealth = enemyHealth - playerAttack;
+        var damage = randomNumber(playerAttack - 3, playerAttack);
+        enemyHealth = Math.max(0, enemyHealth - damage);
         // Log a message to the console to confirm the operation
         console.log(playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining.");
         // Check enemy's health
@@ -48,7 +58,8 @@ var fight = function(enemyName) {
             window.alert(enemyName + " still has " + enemyHealth + " health left.");
         }
         // Subtract 'enemyAttack' from 'playerHealth'
-        playerHealth = playerHealth - enemyAttack;
+        var damage = randomNumber(enemyAttack - 3, enemyAttack);
+        playerHealth = Math.max(0, playerHealth - damage);
         // Log a message to the console to confirm the operation
         console.log(enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining.");
         // check player's health
